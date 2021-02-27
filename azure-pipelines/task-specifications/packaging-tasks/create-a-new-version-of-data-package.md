@@ -18,7 +18,7 @@ Create a versioned artifact consisting of Salesforce records in CSV format, gene
 
 {% tabs %}
 {% tab title="Input" %}
-Classic Designer Labels are in **Bold,**  YAML Variables are in _italics_
+Classic Designer Labels are in **Bold,** YAML Variables are in _italics_
 
 * **Name of the package** / _package_
 
@@ -34,11 +34,11 @@ Classic Designer Labels are in **Bold,**  YAML Variables are in _italics_
 
 * **Tag latest commit ID with package name and version** / _isGitTag_
 
-  Enable this option to tag the latest commit ID with an annotated Git tag that shows the package name and version. To push the tag to your repository, please refer to [Execute Post Steps after Creating a Package](execute-post-steps-after-creating-a-package.md). 
+  Enable this option to tag the latest commit ID with an annotated Git tag that shows the package name and version. To push the tag to your repository, please refer to [Execute Post Steps after Creating a Package](execute-post-steps-after-creating-a-package.md).
 
 * **Project Directory** / _project\_directory_
 
-  This parameter may be left blank if the `sfdx-project.json` is in the root of the repository, else provide the folder directory containing the `sfdx-project.json` 
+  This parameter may be left blank if the `sfdx-project.json` is in the root of the repository, else provide the folder directory containing the `sfdx-project.json`
 {% endtab %}
 
 {% tab title="Output" %}
@@ -71,7 +71,7 @@ steps:
 
 The following properties can be added to the SFDX project configuration.
 
-| Property | Type  | Value/s | Required |
+| Property | Type | Value/s | Required |
 | :--- | :--- | :--- | :--- |
 | type | String | data | true |
 | preDeploymentSteps | String | AssignPermissionSets | false |
@@ -84,10 +84,4 @@ Properties in the SFDX project configuration are case sensitive.
 **Changelog**
 
 * 1.0.0 Initial version
-
-
-
-
-
-
 

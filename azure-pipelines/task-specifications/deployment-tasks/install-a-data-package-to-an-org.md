@@ -4,7 +4,7 @@
 | :--- | :--- |
 | sfpowerscripts-installdatapackage-task | 1.0.27 |
 
-Installs a [Data package](../packaging-tasks/create-a-new-version-of-data-package.md), containing  Salesforce records in CSV format, to an org. 
+Installs a [Data package](../packaging-tasks/create-a-new-version-of-data-package.md), containing Salesforce records in CSV format, to an org.
 
 **Prerequisites**
 
@@ -18,15 +18,15 @@ The SFDX SFDMU plugin is required for this task to work. It can be installed usi
 
 {% tabs %}
 {% tab title="Input Parameters" %}
-Classic Designer Labels are in **Bold,**  YAML Variables are in _italics_
+Classic Designer Labels are in **Bold,** YAML Variables are in _italics_
 
 * **Alias or username of the target org** / _target\_org_
 
-  Provide the alias or username of the target org  on which the unlocked package is to be deployed
+  Provide the alias or username of the target org on which the unlocked package is to be deployed
 
 * **Name of the package to be installed** / _package_
 
-  Name of the package to be installed  
+  Name of the package to be installed
 
 * **Path to the directory where artifacts are downloaded** / _artifactDir_
 

@@ -4,7 +4,7 @@ description: Build Stage / Continuous Integration Pipeline
 
 # Build Pipeline - Org Based Deployment
 
-This pipeline demonstrates how you can build a continuous integration pipeline for if you are using  an [org model of development](https://trailhead.salesforce.com/en/content/learn/modules/org-development-model)  . In an  Org based deployment, one typically deploys the source directly to an org , hence there is no need of build stage. However as mentioned in [principles](../../principles-1.md#generate-artifacts-on-build-stage), we believe only versioned artifacts should be utilized in a deployment stage. Therefore, the pipeline has tasks that creates an artifact which is bounded to the particular merge.
+This pipeline demonstrates how you can build a continuous integration pipeline for if you are using  an [org model of development](https://trailhead.salesforce.com/en/content/learn/modules/org-development-model)  . In an  Org based deployment, one typically deploys the source directly to an org , hence there is no need of build stage. However as mentioned in [principles](), we believe only versioned artifacts should be utilized in a deployment stage. Therefore, the pipeline has tasks that creates an artifact which is bounded to the particular merge.
 
 [This pipeline](https://raw.githubusercontent.com/azlamsalam/sfpowerscripts/release/SamplePipelines/sfpowerscripts-sample-pipelines/BuildDefinitions/Source%20Package%20Build%20using%20sfpowerscripts.json) is triggered on every successful completion of a feature branch into the develop/master branch. If the frequency is quite high, you can look into utilizing `[ci skip]` in front of the commit message to skip a trigger of this pipeline
 

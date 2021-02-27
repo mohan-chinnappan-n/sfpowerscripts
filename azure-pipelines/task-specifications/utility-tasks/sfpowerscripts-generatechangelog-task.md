@@ -4,25 +4,23 @@ description: >-
   report of all changes to packages in a release
 ---
 
-# Generate Changelog \[ALPHA\]
+# Generate Changelog
 
 | Task ID | Version |
 | :--- | :--- |
 | ​sfpowerscripts-generatechangelog-task | ​1.0.0 |
 
-Generates a release change log that summarises artifact versions, work items \(user stories\) and commits that have been introduced in the release. 
+Generates a release change log that summarises artifact versions, work items \(user stories\) and commits that have been introduced in the release.
 
-#### 
-
-#### Task Snapshot
+## Task Snapshot
 
 ![](../../../.gitbook/assets/generatechangelog.png)
 
-#### Parameters
+## Parameters
 
 {% tabs %}
 {% tab title="Input Parameters" %}
-Classic Designer Labels are in **Bold,**  YAML Variables are in _italics_
+Classic Designer Labels are in **Bold,** YAML Variables are in _italics_
 
 * **Path to the directory where artifacts are downloaded** / _aritfactDir_
 
@@ -56,23 +54,32 @@ Classic Designer Labels are in **Bold,**  YAML Variables are in _italics_
 
   Warning: ignores conflicts and overrwrites branch
 
-* **Select the version control provider /** _versionControlProvider_  
-  The version control provider that hosts the particular repository. Select the appropriate repository type from the drop down \(in UI\) or pass the name of the service connection. You can read more on using service connections  [here](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml).
+* **Select the version control provider /** _versionControlProvider_ The version control provider that hosts the particular repository. Select the appropriate repository type from the drop down \(in UI\) or pass the name of the service connection. You can read more on using service connections [here](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml).
 
-  
-  The supported options are    
-  
-  -  **Github Connection /** github\_connection  
-    Use this if your repository  provider is GitHub  
-  -  **GitHub Enterprise Connection /** _github\_enterprise\_connection_   
-     Use this if your repository provider is GitHub Enterprise  
-  __**- Bitbucket Connection /** _bitbucket\_connection_  
-     ****Use this if your repository provider is Bitbucket  
+The supported options are
+
+* **Github Connection /** github\_connection  
+
+  Use this if your repository  provider is GitHub  
+
+* **GitHub Enterprise Connection /** _github\_enterprise\_connection_   
+
+  Use this if your repository provider is GitHub Enterprise  
+
+  _\_**- Bitbucket Connection /** \_bitbucket\_connection_  
+
+  _\*\*_Use this if your repository provider is Bitbucket  
+
   **- Azure Repo /** _azureRepo_  
-   ****Use this if your repository provider is Azure Repo. Please ensure the agent has the right permissions for authenticating to the Azure Repo \( enabled by  '[Allow Scripts to access the OAuth Token'](https://docs.microsoft.com/en-us/azure/devops/pipelines/build/options?view=azure-devops#allow-scripts-to-access-the-oauth-token) \)  
+
+  _\*\*_Use this if your repository provider is Azure Repo. Please ensure the agent has the right permissions for authenticating to the Azure Repo \( enabled by  '[Allow Scripts to access the OAuth Token'](https://docs.microsoft.com/en-us/azure/devops/pipelines/build/options?view=azure-devops#allow-scripts-to-access-the-oauth-token) \)  
+
   **- Other Git /** _otherGit_  
-   ****Any other Git provider which can be authenticated using a username/password based basic authentication schema.  
-  - **Git which is already authenticated at the agent level /** hostedAgentGit  
+
+  _\*\*_Any other Git provider which can be authenticated using a username/password based basic authentication schema.  
+
+* **Git which is already authenticated at the agent level /** hostedAgentGit  
+
   Use this option if the agent is already authenticated to Git repository \(typically used in a self hosted agent or if none of the above methods are not suffice to connect to your git repository\)
 {% endtab %}
 
@@ -91,7 +98,7 @@ steps:
 {% endtab %}
 {% endtabs %}
 
-#### Changelog
+## Changelog
 
 * 1.0.0 Initial version
 
