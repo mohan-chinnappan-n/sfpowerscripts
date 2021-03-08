@@ -24,7 +24,7 @@ This task is used to authenticate against a salesforce org to do further actions
 {% endtab %}
 
 {% tab title="Credentials" %}
-![Authenticate a Salesforce Org using credentials](../../../.gitbook/assets/Authenticate%20a%20Salesforce%20Org%20using%20Credentials%20%281%29.png)
+![Authenticate a Salesforce Org using credentials](../../../.gitbook/assets/Authenticate%20a%20Salesforce%20Org%20using%20Credentials%20%281%29%20%281%29.png)
 {% endtab %}
 {% endtabs %}
 
