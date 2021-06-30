@@ -39,7 +39,7 @@ description: Commands in sfpowerscripts
 
 ## `sfdx sfpowerscripts:orchestrator:prepare`
 
-Prepare a pool of scratchorgs with all the packages upfront, so that any incoming change can be validated in an optimized manner, Please note for this feature to work the devhub should be enabled and scratchorgpool \(additional fields to ScratchOrgInfo object\) should be deployed to devhub. Please see the instructions [here](https://github.com/Accenture/sfpowerkit/wiki/Getting-started-with-ScratchOrg-Pooling#1-install-the-supporting-fields-and-validation-rule-to-devhub). This command also install an unlocked package to the scratch org 'sfpowerscripts-artifact' \(04t1P000000ka0fQAA\) for skipping unchanged packages during a validation phase. This particular package can be prebuilt against your org and the ID could be overriden by setting up the environment variable SFPOWERSCRIPTS\_ARTIFACT\_UNLOCKED\_PACKAGE
+Prepare a pool of scratchorgs with all the packages upfront, so that any incoming change can be validated in an optimized manner, Please note for this feature to work the devhub should be enabled and scratchorgpool \(additional fields to ScratchOrgInfo object\) should be deployed to devhub. Please see the instructions [here](https://github.com/Accenture/sfpowerkit/wiki/Getting-started-with-ScratchOrg-Pooling#1-install-the-supporting-fields-and-validation-rule-to-devhub). This command also install an unlocked package to the scratch org 'sfpowerscripts-artifact' \(04t1P000000ka9mQAA\) for skipping unchanged packages during a validation phase. This particular package can be prebuilt against your org and the ID could be overriden by setting up the environment variable SFPOWERSCRIPTS\_ARTIFACT\_UNLOCKED\_PACKAGE
 
 ```text
 Prepare a pool of scratchorgs with all the packages upfront, so that any incoming change can be validated in an optimized manner,
@@ -302,7 +302,7 @@ _See code:_ [_commands/sfpowerscripts/orchestrator/build.ts_](https://github.com
 
 ## `sfdx sfpowerscripts:orchestrator:deploy`
 
-Deploy packages from the provided aritfact directory, to a given org, using the order and configurable flags provided in sfdx-project.json `skipifalreadyinstalled` only works provide the target org has sfpowerscripts-artifact' \(04t1P000000ka0fQAA\) installed. Please note you can deploy your own instance of 'sfpowerscripts-artifact' by building it from the repo and overriding using the environment variable SFPOWERSCRIPTS\_ARTIFACT\_UNLOCKED\_PACKAGE
+Deploy packages from the provided aritfact directory, to a given org, using the order and configurable flags provided in sfdx-project.json `skipifalreadyinstalled` only works provide the target org has sfpowerscripts-artifact' \(04t1P000000ka9mQAA\) installed. Please note you can deploy your own instance of 'sfpowerscripts-artifact' by building it from the repo and overriding using the environment variable SFPOWERSCRIPTS\_ARTIFACT\_UNLOCKED\_PACKAGE
 
 ```text
 Deploy packages from the provided aritfact directory, to a given org, using the order and configurable flags provided in sfdx-project.json
@@ -402,6 +402,68 @@ EXAMPLES
 ```
 
 _See code:_ [_commands/sfpowerscripts/orchestrator/publish.ts_](https://github.com/Accenture/sfpowerscripts/tree/develop/packages/sfpowerscripts-cli/src/commands/sfpowerscripts/orchestrator/publish.ts)
+
+## `sfdx sfpowerscripts:orchestrator:release`
+
+Initiate a release to an org, according to the release configuration defined in a release-definition YAML file
+
+```text
+Initiate a release to an org, according to the configuration defined in a release-definition YAML file
+
+USAGE
+  $ sfdx sfpowerscripts:orchestrator:release -u <string> [-p <filepath>] [--scope <string> [--npm | -f <filepath>]] [--npmrcpath <filepath> 
+  undefined] [-g <array>] [-t <string>] [--waittime <number>] [--keys <string>] [-b <string> --generatechangelog] [-v <string>] [--json] 
+  [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+OPTIONS
+  -b, --branchname=branchname                                                       Repository branch in which the changelog files are 
+                                                                                    located
+
+  -f, --scriptpath=scriptpath                                                       (Optional: no-NPM) Path to script that authenticates and 
+                                                                                    downloads artifacts from the registry
+
+  -g, --logsgroupsymbol=logsgroupsymbol                                             Symbol used by CICD platform to group/collapse logs in 
+                                                                                    the console. Provide an opening group, and an optional 
+                                                                                    closing group symbol.
+
+  -p, --releasedefinition=releasedefinition                                         Path to YAML file containing map of packages and package 
+                                                                                    versions to download
+
+  -t, --tag=tag                                                                     Tag the release with a label, useful for identification 
+                                                                                    in metrics
+
+  -u, --targetorg=targetorg                                                         (required) [default: scratchorg] Alias/User Name of the 
+                                                                                    target environment
+
+  -v, --devhubalias=devhubalias                                                     [default: HubOrg] Provide the alias of the devhub 
+                                                                                    previously authenticated, default value is HubOrg
+
+  --generatechangelog                                                               Create a release changelog
+
+  --json                                                                            format output as json
+
+  --keys=keys                                                                       Keys to be used while installing any managed package 
+                                                                                    dependencies. Required format is a string of key-value 
+                                                                                    pairs separated by spaces e.g. packageA:pw123 
+                                                                                    packageB:pw123 packageC:pw123
+
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for this command 
+                                                                                    invocation
+
+  --npm                                                                             Download artifacts from a pre-authenticated private npm 
+                                                                                    registry
+
+  --npmrcpath=npmrcpath                                                             Path to .npmrc file used for authentication to registry. 
+                                                                                    If left blank, defaults to home directory
+
+  --scope=scope                                                                     (required for NPM) User or Organisation scope of the NPM 
+                                                                                    package
+
+  --waittime=waittime                                                               [default: 120] Wait time for package installation
+
+EXAMPLE
+  sfdx sfpowerscripts:orchestrator:release -p path/to/releasedefinition.yml -u myorg --npm --scope myscope --generatechangelog
+```
 
 ## `sfdx sfpowerscripts:changelog:generate`
 
@@ -747,7 +809,7 @@ _See code:_ [_commands/sfpowerscripts/package/source/create.ts_](https://github.
 
 ## `sfdx sfpowerscripts:package:source:install`
 
-Installs a sfpowerscripts source package to the target org. skipifalreadyinstalled\` only works provide the target org has sfpowerscripts-artifact' \(04t1P000000ka0fQAA\) installed. Please note you can deploy your own instance of 'sfpowerscripts-artifact' by building it from the repo and overriding using the environment variable SFPOWERSCRIPTS\_ARTIFACT\_UNLOCKED\_PACKAGE
+Installs a sfpowerscripts source package to the target org. skipifalreadyinstalled\` only works provide the target org has sfpowerscripts-artifact' \(04t1P000000ka9mQAA\) installed. Please note you can deploy your own instance of 'sfpowerscripts-artifact' by building it from the repo and overriding using the environment variable SFPOWERSCRIPTS\_ARTIFACT\_UNLOCKED\_PACKAGE
 
 ```text
 Installs a sfpowerscripts source package to the target org
