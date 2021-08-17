@@ -41,10 +41,4 @@ To only run PMD Analysis on packages that have changes.
 ```
 To be able to select Specific packages
 
-```bash
--f, --configfilepath=configfilepath
-```
-Relative Path to the pool configuration json file. The schema of the file could be found in the Wiki
-
-
 Possible flags considered would be having the option to specific for PMD analysis only and package validate.
