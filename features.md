@@ -15,9 +15,9 @@ description: Learn about all the features in sfpowerscripts
 * Enhance your  sfdx-project.json to orchestrate validation, build and deployment, acting as source of truth for everything about a package.
 * “Thou shall not leave sfdx-project.json” – Zero intervention required on your pipeline when you add or remove packages
 
-## **Instantaneous CI Environments!**
+## **Instantaneous Dev/CI Environments!**
 
-* Prepare a pool of Scratch Org’s to act as a just in time CI orgs, reducing a significant amount of time during the validation phase
+* Prepare a pool of Scratch Org’s to act as a Dev Environments/ Just in time CI orgs
 
 ## **Shift Left... We got it Right!**
 
@@ -52,5 +52,5 @@ description: Learn about all the features in sfpowerscripts
 ## **Observability at its Best**
 
 * All functionality instrumented with StatsD, as well as Log Based metrics to build dashboards the way you want it.
-* Native integration with DataDog
+* Native integration with DataDog/Newrelic
 
