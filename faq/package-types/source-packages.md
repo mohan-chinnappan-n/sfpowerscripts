@@ -47,7 +47,7 @@ All these currently available options that can be enabled for source packaging b
 * **Optimized Deployment  \(`isOptimizedDeployment:<boolean>)`:** Control the behaviour of testing of source packages during deployment, utilize the org's coverage or better have apex unit tests that have 75% or more coverage for each class carried in the source package. Any source packages that do not have apex classes/triggers will be deployed without triggering tests  
 * **Aliasify \(`aliasfy:<boolean>`\)** :  Aliasify enables deployment of a subfolder in a source package that matches the target org. For example, you have a source package as listed below. During Installation, only the metadata contents of the folder that matches the alias gets deployed
 
-![Source Packages with env-specific-folders](../../.gitbook/assets/image%20%285%29%20%284%29%20%283%29%20%284%29%20%281%29%20%2811%29.png)
+![Source Packages with env-specific-folders](../../.gitbook/assets/image%20%285%29%20%284%29%20%283%29%20%284%29%20%281%29%20%2810%29.png)
 
 * **Skip Testing \( `skipTesting:<boolean>`\)** :  Allows you to deploy a source package without triggering test to an Org. Please note, this is only applicable during deployments to sandboxes.  Apex tests are mandatory \(if your package contains apex classes/triggers\) during deployment to production.
 * **Reconcile Profiles \(  `reconcileProfiles:<boolean>`\) :**  By default, true, automatically reconcile a profile existing in the source package against the target org. Read more about reconcile option [here](https://github.com/Accenture/sfpowerkit/discussions/410).
@@ -97,10 +97,9 @@ By utilizing a destructive manifest file, one could delete metadata components d
 
 ## Why is the version number for source packages have to end with zero? Doesn't it support .next?
 
-At the moment, it is not supported. So ensure that all your source packages in your repository has '0' as placeholder for the build number which can be replaced by a build number passed as a flag by the build command
-Make sure to use the right variable name according to your CI/CD system, the sample below describes how to pass the build number using GITLAB CI/CD.
-```text
-sfdx sfpowerscripts:orchestrator:quickbuild --buildnumber ${CI_JOB_ID} --configfilepath config/scratch-org-def.json --diffcheck --branch develop 
-```
+At the moment, it is not supported. So ensure that all your source packages in your repository has '0' as placeholder for the build number which can be replaced by a build number passed as a flag by the build command Make sure to use the right variable name according to your CI/CD system, the sample below describes how to pass the build number using GITLAB CI/CD.
 
+```text
+sfdx sfpowerscripts:orchestrator:quickbuild --buildnumber ${CI_JOB_ID} --configfilepath config/scratch-org-def.json --diffcheck --branch develop
+```
 
