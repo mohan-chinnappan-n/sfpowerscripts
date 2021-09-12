@@ -8,7 +8,7 @@
 
 * [Prerequisites](getting-started/prerequisites.md)
 * [Docker](getting-started/docker.md)
-* [Sample Repository](https://github.com/dxatscale/easy-spaces-lwc)
+* [Sample Repository](https://github.com/dxatscale/dxatscale-template)
 
 ## CONCEPTS <a id="faq"></a>
 

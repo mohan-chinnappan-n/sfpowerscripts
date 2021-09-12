@@ -26,10 +26,18 @@ The preferred method of authenticating to Dev Hub for the CI service user is thr
 To retrieve the SFDX Auth URL:
 
 1. Login to Dev Hub with the CI service user, using web auth:
-   1. `sfdx force:auth:web:login -r https://login.salesforce.com`
-2. Run the `force:org:display` command with the `--verbose` and `–json` flags
-   1. `sfdx force:org:display -u CIServiceUser –verbose –json`
-3. Copy the value of the SFDX Auth URL field into CICD secrets
+
+```text
+sfdx force:auth:web:login -r <your-domain-url>
+```
+
+1. Run the `force:org:display` command with the `--verbose` and `–json` flags
+
+```text
+ sfdx force:org:display -u CIServiceUser –verbose –json
+```
+
+1. Copy the value of the SFDX Auth URL field into CICD secrets
 
 For more information on SFDX Auth URL, visit the Salesforce [documentation](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_auth_sfdxurl.htm).
 
