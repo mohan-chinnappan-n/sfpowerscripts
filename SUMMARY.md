@@ -19,7 +19,6 @@
   * [Unlocked Packages](faq/package-types/unlocked-packages.md)
   * [Source Packages](faq/package-types/source-packages.md)
   * [Data Packages](faq/package-types/data-packages.md)
-* [Environment variables](faq/environment-variables.md)
 
 ## COMMANDS
 
@@ -31,6 +30,7 @@
 * [Publish](commands/publish.md)
 * [Release](commands/release.md)
 * [Command Glossary](commands/command-glossary.md)
+* [Environment variables](commands/environment-variables.md)
 
 ## FAQ <a id="faq-1"></a>
 
