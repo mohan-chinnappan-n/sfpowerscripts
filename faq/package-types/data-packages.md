@@ -4,7 +4,7 @@
 
 Data packages are a sfpowerscripts construct that utilise the [SFDMU plugin](https://github.com/forcedotcom/SFDX-Data-Move-Utility) to create a versioned artifact of Salesforce object records in csv format, which can be deployed to the a Salesforce org using the sfpowerscripts package installation command.
 
-The Data Package offers a seamless method of integrating Salesforce data into your CICD pipelines , and is primarily intended for record-based configuration of managed package such as CPQ, Vlocity \(Salesforce Industries\), and nCino.
+The Data Package offers a seamless method of integrating Salesforce data into your CICD pipelines , and is primarily intended for record-based configuration of managed package such as CPQ, Vlocity (Salesforce Industries), and nCino.
 
 ## Why should I use Data Packages instead of SFDMU directly?
 
@@ -16,9 +16,9 @@ Data packages are a wrapper around SFDMU that provide a few key benefits:
 
 ## How do I define a Data Package in the sfdx-project.json?
 
-Simply add an entry in the package directories, providing the package's name, path, version number and type \(data\). Your editor may complain that the 'type' property is not allowed, but this can be safely ignored.
+Simply add an entry in the package directories, providing the package's name, path, version number and type (data). Your editor may complain that the 'type' property is not allowed, but this can be safely ignored.
 
-```text
+```
   {
     "path": "path--to--data--package",
     "package": "name--of-the-data package", //mandatory, when used with sfpowerscripts
@@ -30,15 +30,15 @@ Simply add an entry in the package directories, providing the package's name, pa
 
 ## How do I generate the csv files and export.json for my Data Package?
 
-Export your Salesforce records to csv files using the [SFDMU plugin](https://github.com/forcedotcom/SFDX-Data-Move-Utility). For more information on plugin installation, creating an export.json file, and exporting to csv files, refer to _Plugin Basic &gt; Basic Usage_ in SFDMU's [documentation](https://help.sfdmu.com/quick-start).
+Export your Salesforce records to csv files using the [SFDMU plugin](https://github.com/forcedotcom/SFDX-Data-Move-Utility). For more information on plugin installation, creating an export.json file, and exporting to csv files, refer to _Plugin Basic > Basic Usage_ in SFDMU's [documentation](https://help.sfdmu.com/quick-start).
 
-![A sample data package structure](../../.gitbook/assets/image%20%285%29.png)
+![A sample data package structure](<../../.gitbook/assets/image (5).png>)
 
 ## **What are my options with Data Packages?**
 
 Data packages support the following options, through the sfdx-project.json.
 
-```text
+```
   {
     "path": "path--to--package",
     "package": "name--of-the-package", //mandatory, when used with sfpowerscripts
@@ -52,13 +52,17 @@ Data packages support the following options, through the sfdx-project.json.
   }
 ```
 
+**Aliasfy (aliasfy \<boolean>)**: Aliasify enables deployment of a subfolder in a data package that matches the target org. For example, you could have a data package as shown below. During Installation, only the records of the folder that matches the alias gets deployed. An optional 'default' folder can be specified, which is deployed when there are no folders with a matching alias. The 'default' folder will not be deployed to production, which needs an explicit subfolder with matching alias to be created.
+
+![Data package with env-specific folders](../../.gitbook/assets/aliasfy-data-pkg.png)
+
 ## How to create a pre/post deployment script for data package?
 
-In some situations, you might need to execute a pre/post deployment script to do manipulate the data before or after being deployed to the org. **sfpowerscripts** allow you to provide a path to a shell script \(Mac/Unix\) / batch script \(on Windows\). The script will be provided with the following parameters which could be utilized to write your logic
+In some situations, you might need to execute a pre/post deployment script to do manipulate the data before or after being deployed to the org. **sfpowerscripts** allow you to provide a path to a shell script (Mac/Unix) / batch script (on Windows). The script will be provided with the following parameters which could be utilized to write your logic
 
 For eg: if you want to trigger an anonymous apex script after the installation of the package, you will create a script file similar to below and then add the path to the **postDeploymentScript** property of your data package
 
-```text
+```
 # $1 package name
 # $2 org
 
@@ -72,4 +76,3 @@ The error arises because the Data Package contains csv files, which are not nati
 ## Why is the version number for data packages have to end with zero? Doesn't it support .next?
 
 At the moment, it is not supported and we have a bug where the .next is not replaced by passed build number. So ensure that all your source packages in your repository has '0' as the build number.
-

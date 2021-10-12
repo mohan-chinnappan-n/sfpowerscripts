@@ -8,13 +8,13 @@ Prepare command helps you to build a pool of prebuilt scratch orgs which include
 
 ## Using scratch org as Developer Environments
 
-Scratch orgs are one of the best features that Salesforce released, where they re-imagined the developer experience on the platform. Scratch orgs are ephemeral orgs that can be provisioned as a just-in-time environment, which can be populated with metadata and data from source control repository. This allows one to be in control of the metadata and data that needs to be provisioned in the orgs as opposed to sandboxes \(which are either a clone of another sandbox or created from production\). 
+Scratch orgs are one of the best features that Salesforce released, where they re-imagined the developer experience on the platform. Scratch orgs are ephemeral orgs that can be provisioned as a just-in-time environment, which can be populated with metadata and data from source control repository. This allows one to be in control of the metadata and data that needs to be provisioned in the orgs as opposed to sandboxes (which are either a clone of another sandbox or created from production). 
 
 Scratch orgs helps to create environments at any specific point in time in your version control, and results in an interesting side effect, i.e. significant reduction in manual steps, as the whole objective is to get an org ready for development just from code.
 
 ## Using scratch orgs as Just in Time CI environments
 
-The ability to quickly spin up an environment that is completely built from your source code repository, makes scratch orgs an ideal candidate for validating changes before merging pull requests. In this process, a freshly spun up scratch org could be used to deploy the metadata in your repository with the changes \( a PR process creates a temporary merge of the incoming branch along with current head of the target branch\), run apex tests, run UI tests etc. This addresses the following problems compared to using a sandbox for validation, especially in large programs.
+The ability to quickly spin up an environment that is completely built from your source code repository, makes scratch orgs an ideal candidate for validating changes before merging pull requests. In this process, a freshly spun up scratch org could be used to deploy the metadata in your repository with the changes ( a PR process creates a temporary merge of the incoming branch along with current head of the target branch), run apex tests, run UI tests etc. This addresses the following problems compared to using a sandbox for validation, especially in large programs.
 
 * **Time consumed to spin a sandbox:** Developer sandbox still takes anywhere under 1 hour to create and activate a new environment. So it is not cost effective to provision sandboxes as a just-in-time disposable environment.   
 * **CI Org getting corrupted:**  Due to the time taken to spin a sandbox for every run,  often a dedicated CI sandbox or an existing sandbox is re-purposed for validating incoming pull requests.  Due to the nature in software development for Salesforce, these sandbox typically tend to become corrupted due to unwanted deployments or configuration changes directly in the org.  As a result the changes must be manually fixed before being able to be use again as the CI org.   
@@ -22,12 +22,12 @@ The ability to quickly spin up an environment that is completely built from your
 
 ## Building a pool of scratch orgs
 
-As you try to automate more of your business processes in Salesforce, you cannot avoid adding third party managed packages as a dependency to your configuration metadata and code in your repository. The time required to spin up a just-in-time CI scratch org or even a developer environment \(one need to run data loading scripts, assign permission sets etc.\) would increase and the value of scratch org diminishes, as teams find it cumbersome.
+As you try to automate more of your business processes in Salesforce, you cannot avoid adding third party managed packages as a dependency to your configuration metadata and code in your repository. The time required to spin up a just-in-time CI scratch org or even a developer environment (one need to run data loading scripts, assign permission sets etc.) would increase and the value of scratch org diminishes, as teams find it cumbersome.
 
 This is the primary reason scratch org pools pre-installed with managed packages and your custom configuration and code, along with data from your repository will significantly enhance the developer experience. 
 
 {% hint style="info" %}
-The Prepare command was built primarily due to the delays from Salesforce to enable **snapshot** feature and make it GA to the public. However, even with snapshot feature, you might need to rebuild the snapshot every day, as we have noticed in a large mono repo scenario \(full deployment of metadata also takes long time\). We will modify the command as needed when this feature launches to utilize snapshot accordingly.
+The Prepare command was built primarily due to the delays from Salesforce to enable **snapshot** feature and make it GA to the public. However, even with snapshot feature, you might need to rebuild the snapshot every day, as we have noticed in a large mono repo scenario (full deployment of metadata also takes long time). We will modify the command as needed when this feature launches to utilize snapshot accordingly.
 {% endhint %}
 
 We expect you to build a pool of scratch org's using a pipeline at scheduled intervals, that ensures the pools are always replenished with scratch org's ready for consumption whenever you demand it.
@@ -40,11 +40,11 @@ Note that to enable scratch org pooling, you will need to deploy some prerequisi
 
 The prepare command does the following sequence of activities
 
-1. **Calculate the number of scratch orgs to be allocated** \(Based on your requested number of scratch orgs and your org limits, we calculate what is the number of scratch orgs to be allocated at this point in time\)
+1. **Calculate the number of scratch orgs to be allocated** (Based on your requested number of scratch orgs and your org limits, we calculate what is the number of scratch orgs to be allocated at this point in time)
 2. **Fetch the artifacts from registry if "fetchArtifacts" is defined in config, otherwise build all artifacts**
-3. **Create the scratch orgs, and update Allocation\_status\_c of each these orgs to "In Progress"**
+3. **Create the scratch orgs, and update Allocation_status_c of each these orgs to "In Progress"**
 4. **On each scratch org, in parallel, do the following activities:**
-   * Install SFPOWERSCRIPTS\_ARTIFACT\_PACKAGE \(04t1P000000ka9mQAA\) for keeping track of all the packages which will be installed in the org. You can set an environment variable SFPOWERSCRIPTS\_ARTIFACT\_PACKAGE to override the installation with your own package id \(the source code is available [here](https://github.com/Accenture/sfpowerscripts/tree/develop/prerequisites/sfpowerscripts-artifact)\)
+   * Install SFPOWERSCRIPTS_ARTIFACT_PACKAGE (04t1P000000ka9mQAA) for keeping track of all the packages which will be installed in the org. You can set an environment variable SFPOWERSCRIPTS_ARTIFACT_PACKAGE to override the installation with your own package id (the source code is available [here](https://github.com/Accenture/sfpowerscripts/tree/develop/prerequisites/sfpowerscripts-artifact))
    * Install all the dependencies of your packages, such as managed packages that are marked as dependencies in your sfdx-project.json
    * Install all the artifacts that is either built/fetched
    * If `enableSourceTracking` is specified in the configuration, create and deploy "sourceTrackingFiles" static resource to the scratch org. The static resource is retrieved to the local ".sfdx" directory, when using `sfpowerscripts:pool:fetch` to fetch a scratch org, and allows users to deploy their changes only, through source tracking. 
@@ -52,7 +52,7 @@ The prepare command does the following sequence of activities
 6. **Delete all the failed scratch orgs** - check **Why do some scratch org's fail during pool creation?** below
 
 {% hint style="warning" %}
- **Ensure that your DevHub is authenticated using** [**SFDX Auth URL**](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_auth_sfdxurl.htm) **and the auth URL is stored in a secure place \(Key Management System or Secure Storage\).**
+** Ensure that your DevHub is authenticated using** [**SFDX Auth URL**](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_auth_sfdxurl.htm) **and the auth URL is stored in a secure place (Key Management System or Secure Storage).**
 {% endhint %}
 
 ## **Using pre-existing artifacts in Scratch Org Pools**
@@ -74,7 +74,7 @@ sfdx sfpowerscripts:pool:fetch -t <POOL_NAME> -v <devhub-alias> -a <scratchorg-a
 Developers need sufficient permission in the associated DevHub to fetch a scratch org. Read more about associated permissions [here](https://sfpowerscripts.dxatscale.io/getting-started/prerequisites#grant-developers-access-to-scratch-org-pools).
 
 {% hint style="warning" %}
-When [Free Limited Access Licenses](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/dev_hub_license.htm) are being utilized, developers will not be able to delete the scratch orgs fetched from the pool \(due to permission restrictions\). It is recommended to build a pipeline in your CI/CD system that is run with elevated permission and license which could delete these scratch orgs.
+When [Free Limited Access Licenses](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/dev_hub_license.htm) are being utilized, developers will not be able to delete the scratch orgs fetched from the pool (due to permission restrictions). It is recommended to build a pipeline in your CI/CD system that is run with elevated permission and license which could delete these scratch orgs.
 {% endhint %}
 
 {% hint style="info" %}
@@ -138,7 +138,7 @@ Let's unpack the concepts utilizing the above example:
   * Skips Expense manager - Util as it doesn't have any dependencies
   * For Expense manager
     * Checks whether any of the package is part of the same repo, in this example 'Expense Manager-Util' is part of the same repository and will not be installed as a dependency
-    * Installs the latest version of TriggerFramework \( with major, minor and patch versions matching 1.7.0\) to the scratch org
+    * Installs the latest version of TriggerFramework ( with major, minor and patch versions matching 1.7.0) to the scratch org
     * Install the 'External Apex Library - 1.0.0.4' by utilizing the 04t id provided in the packageAliases
 
 If any of the managed package has keys, it can be provided as an argument to the prepare command. Check the command's flags for more information.
@@ -159,7 +159,7 @@ For changes to the features and settings in pooled scratch orgs, check out the [
 
 ## Managing the Scratch Org pool
 
-The `sfpowerscripts:pool` topic contains commands that can be used to manage \(list, fetch and delete\) the scratch org pools created by prepare command.
+The `sfpowerscripts:pool` topic contains commands that can be used to manage (list, fetch and delete) the scratch org pools created by prepare command.
 
 ## Package checkpoints
 
@@ -177,7 +177,7 @@ There are multiple parameters available in the shell script. Pass these paramete
 
 **Eg.** **Fetching from Azure Artifacts using the Az CLI on Linux**
 
-```text
+```
 #!/bin/bash
 
 # $1 - artifact name
@@ -190,5 +190,4 @@ az artifacts universal download --feed myfeed --name $1 --version $2 --path $3 \
     --organization "https://dev.azure.com/myorg/" --project myproject --scope project
 ```
 
-## 
-
+##
